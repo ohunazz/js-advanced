@@ -19,3 +19,5 @@ Pokemon.prototype.revive = function () {
     this.hp = Math.floor(2.25 * this.level);
     return this;
 };
+
+Pokemon.prototype.call = function () {};
