@@ -46,8 +46,8 @@ Task: Write a function greet(name) that returns a function to generate customize
 Explanation: The inner function maintains access to the name variable and uses it to generate custom greetings. */
 
 function greet(name) {
-    return function (timeOfDay) {
-        return "Good " + timeOfDay + ", " + name + "!";
+    return function (time) {
+        return "Good " + time + ", " + name + "!";
     };
 }
 
@@ -83,3 +83,93 @@ function multiplier(factor) {
 
 const double = multiplier(2);
 console.log(double(5));
+
+// Part-2 //
+
+/*1. Double Multiplier:
+Task: Extend the multiplier function to take two factors and return a function to multiply any number by those factors. */
+
+function doubleMultiplier(factor1, factor2) {
+    return function (number) {
+        const result = factor1 * factor2 * number;
+        return result;
+    };
+}
+
+const doubleAndTriple = doubleMultiplier(2, 3);
+console.log(doubleAndTriple(5));
+
+/*2. Sequential Greetings
+Task: Create a function that takes a name and returns a series of functions for different greeting times (morning, evening, etc.) */
+
+function createGreetingFunctions(name) {
+    return {
+        morning: function () {
+            return "Good morning, " + name;
+        },
+        afternoon: function () {
+            return "Good afternoon, " + name;
+        },
+        evening: function () {
+            return "Good evening, " + name;
+        }
+    };
+}
+
+const greetForTom = createGreetingFunctions("Tom");
+
+console.log(greetForTom.morning());
+console.log(greetForTom.afternoon());
+console.log(greetForTom.evening());
+
+/*3. Personal Library
+Task: Create a function that returns an object with methods to add, remove, and list books in a personal library. */
+
+function personalLibrary() {
+    const books = [];
+    return {
+        add: function (bookTitle) {
+            books.push(bookTitle);
+        },
+        remove: function (bookTitle) {
+            books.shift(bookTitle);
+        },
+        list: function () {
+            return books;
+        }
+    };
+}
+
+const myLibrary = personalLibrary();
+myLibrary.add("The Nation");
+myLibrary.add("The Great Gatsby");
+myLibrary.remove("The Nation");
+console.log(myLibrary.list()); // ['The Nation']
+
+/*4. Multiplication Table Generator
+Task: Write a function that returns a function to generate multiplication tables for any given number. */
+
+function multiplicationTable(num) {
+    return function () {
+        const table = [];
+        for (let i = 1; i <= 10; i++) {
+            table.push(num * i);
+        }
+        return table;
+    };
+}
+
+const tableOfThree = multiplicationTable(3);
+console.log(tableOfThree()); // [3, 6, 9, ... , 30]
+
+/*5. Favorite Color Reminder:
+Task: Write a function that takes a person's name and favorite color and returns a function to remind you of that person's favorite color. */
+
+function favoriteColorReminder(name, color) {
+    return function () {
+        return name + "'s favorite color is " + color;
+    };
+}
+
+const johnsColor = favoriteColorReminder("John", "blue");
+console.log(johnsColor());
