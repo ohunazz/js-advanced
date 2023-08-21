@@ -93,15 +93,61 @@ console.log(transformedLibrary);
 // 2 //
 
 function filterBooks(books, genreFilter, ratingThreshold, yearRange) {
-    const filteredBooks = books.filter((book) => {
-        const hasCorrectGenre = book.genre === genreFilter;
-
-        const hasGoodRating = book.rating >= ratingThreshold;
-        const isInRange =
-            book.publishedYear >= yearRange[0] &&
-            book.publishedYear <= yearRange[1];
-    });
+    return books
+        .filter(
+            (book) =>
+                book.genre === genreFilter &&
+                book.rating >= ratingThreshold &&
+                book.publishedYear >= yearRange[0] &&
+                book.publishedYear <= yearRange[1]
+        )
+        .map((book) => ({
+            title: book.title,
+            author: book.author
+        }));
 }
+
+const books = [
+    {
+        title: "Harry Potter",
+        author: "J.K. Rowling",
+        genre: "Fantasy",
+        rating: 4.5,
+        publishedYear: 1997
+    },
+    {
+        title: "A Brief History of Time",
+        author: "Stephen Hawking",
+        genre: "Science",
+        rating: 4.7,
+        publishedYear: 1988
+    },
+    {
+        title: "The Catcher in the Rye",
+        author: "J.D. Salinger",
+        genre: "Fiction",
+        rating: 4.8,
+        publishedYear: 1951
+    },
+    {
+        title: "Brave New World",
+        author: "Aldous Huxley",
+        genre: "Fiction",
+        rating: 4.1,
+        publishedYear: 1932
+    },
+    {
+        title: "Pride and Prejudice",
+        author: "Jane Austen",
+        genre: "Classics",
+        rating: 4.5,
+        publishedYear: 1813
+    }
+];
+
+const filteredBooks = filterBooks(books, "Fiction", 4.0, [1900, 2000]);
+
+console.log(filteredBooks);
 
 // 3 //
 
@@ -163,4 +209,12 @@ function checkWinner(board) {
     }
 
     return null;
+}
+const board = ["X", "O", "X", "X", "X", "O", "", "O", "X"];
+const winner = checkWinner(board);
+
+if (winner) {
+    console.log(`${winner} wins!`);
+} else {
+    console.log("No winner yet.");
 }
