@@ -1,14 +1,12 @@
 // 1 //
 
 function transformBooks(library) {
-    const result = [];
-
-    library.map((genreBooks) => {
+    const result = library.map((genreBooks) => {
         let totalRating = 0;
         let maxRating = 0;
         let topBookTitle = "";
 
-        genreBooks.map((book) => {
+        genreBooks.forEach((book) => {
             totalRating += book.rating;
 
             if (book.rating > maxRating) {
@@ -18,13 +16,12 @@ function transformBooks(library) {
         });
 
         const averageRating = totalRating / genreBooks.length;
-        const roundedAverageRating = Math.round(averageRating * 100) / 100;
 
-        result.push({
+        return {
             genre: genreBooks[0].genre,
-            averageRating: roundedAverageRating,
+            averageRating: averageRating,
             topBook: topBookTitle
-        });
+        };
     });
 
     return result;
@@ -93,18 +90,23 @@ console.log(transformedLibrary);
 // 2 //
 
 function filterBooks(books, genreFilter, ratingThreshold, yearRange) {
-    return books
-        .filter(
-            (book) =>
-                book.genre === genreFilter &&
-                book.rating >= ratingThreshold &&
-                book.publishedYear >= yearRange[0] &&
-                book.publishedYear <= yearRange[1]
-        )
-        .map((book) => ({
+    const filteredBooks = books.filter((book) => {
+        return (
+            book.genre === genreFilter &&
+            book.rating >= ratingThreshold &&
+            book.publishedYear >= yearRange[0] &&
+            book.publishedYear <= yearRange[1]
+        );
+    });
+
+    const newFilteredBooks = filterBooks.map((book) => {
+        return {
             title: book.title,
             author: book.author
-        }));
+        };
+    });
+
+    return newFilteredBooks;
 }
 
 const books = [
@@ -161,7 +163,7 @@ function createInventorySystem() {
 
         removeItem(item) {
             const index = items.indexOf(item);
-            if (index !== -1) {
+            if (index !== null) {
                 items.splice(index, 1);
             }
         },
