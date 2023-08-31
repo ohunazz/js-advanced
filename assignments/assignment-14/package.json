@@ -1,0 +1,11 @@
+{
+  "name": "npm-assignment",
+  "version": "1.0.0",
+  "description": "How  to read a CSV file",
+  "main": "npm.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Okhun",
+  "license": "ISC"
+}
